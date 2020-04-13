@@ -48,6 +48,7 @@ class Game extends React.Component {
     this.state = {
       history: [{
         squares: Array(9).fill(null),
+        clicked:0,
       }],
       stepNumber: 0,
       xIsNext:true,
@@ -66,6 +67,7 @@ class Game extends React.Component {
       // concat() doesn't mutate the original array, push() does.
       history: history.concat([{
         squares:squares,
+        clicked:i
       }]),
         stepNumber: history.length,
         xIsNext:!this.state.xIsNext,
@@ -83,10 +85,14 @@ class Game extends React.Component {
     const history = this.state.history;
     const current = history[this.state.stepNumber];
     const winner = calculateWinner(current.squares);
-    
+    // coords to map the clicked square:
+    const coords = [  "(0,0)","(1,0)","(2,0)",
+                      "(0,1)","(1,1)","(2,1)",
+                      "(0,2)","(1,2)","(2,2)"];
+
     const moves = history.map((step,move) => {
       const desc = move ?
-        'Go to move #' + move :
+        'Go to move #' + move + coords[step.clicked]:
         'Go to game start';
       return (
         <li key={move}>
