@@ -5,6 +5,7 @@ const ButtonComponent = props = {
 	return (
 		<View>
 			<Text>{props.buttonName}</Text>
+			<Text>Press</Text>
 		</View>
 	);
 };
